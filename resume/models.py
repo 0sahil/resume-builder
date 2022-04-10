@@ -2,6 +2,8 @@ from re import template
 from django.db import models
 from django.conf import settings
 
+# set blank = true for models for required fields
+
 
 # abstractuser vs abstractbaseuser
 class UserDetails(models.Model):
@@ -22,7 +24,7 @@ class UserAddress(models.Model):
     u_id = models.OneToOneField(UserDetails, on_delete=models.CASCADE, primary_key=True) 
     address = models.CharField(max_length=50)
     city = models.CharField(max_length=30)
-    pincode = models.CharField()
+    pincode = models.CharField() # may have to add more fields
 
 class UserSkill(models.Model):
     u_id = models.ForeignKey(UserDetails, on_delete=models.CASCADE) 
@@ -59,12 +61,12 @@ class ResumeTemplateList(models.Model):
     template = models.FileField()
     u_id = models.ManyToManyField(UserDetails) # many to many, favourite scenario
 
-class AllTemplates(models.Model):
+class AllResume(models.Model):
     t_id = models.IntegerField(primary_key=True)
     template = models.FileField()
     base_template_id = models.IntegerField() # from ResumeTemplateList
 
 class UserResume(models.Model):
     u_id = models.ForeignKey(UserDetails, on_delete=models.CASCADE)
-    t_id = models.OneToOneField(AllTemplates, on_delete=models.CASCADE) # kuch gadbad lag rahi yahan
+    t_id = models.OneToOneField(AllResume, on_delete=models.CASCADE) # kuch gadbad lag rahi yahan
     # shayad ye one to one nahi hoga
