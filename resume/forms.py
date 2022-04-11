@@ -1,6 +1,6 @@
 from dataclasses import fields
 from django.forms import ModelForm
-import models
+from . import models
 
 class UserDetailsForm(ModelForm):
     class Meta:

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import UserDetails
 from .forms import UserDetailsForm
 
+
 # Create your views here.
 
 # render the home page
