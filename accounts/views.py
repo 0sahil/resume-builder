@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import Group
 from resume.models import UserDetails
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -7,7 +8,6 @@ from django.shortcuts import render, redirect
 from.forms import CreateUserForm
 
 
-# TODO ask if user wants to register as User or HiringAgency
 def registerPage(request):
     form = CreateUserForm()
 
@@ -15,8 +15,23 @@ def registerPage(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
+
+            # role based account creation
+            user_type = request.POST.get('user_type')
+            if user_type == 'user':
+                my_group = Group.objects.get(name='User') 
+                my_group.user_set.add(User.objects.get(
+                    username=form.cleaned_data.get('username')).id)
+            elif user_type == 'hir_ag':
+                my_group = Group.objects.get(name='HiringAgency') 
+                my_group.user_set.add(User.objects.get(
+                    username=form.cleaned_data.get('username')).id)
             user = form.cleaned_data.get('username')
-            messages.success(request, 'Account is created for '+user)
+
+            if user_type == 'user':
+                messages.success(request, 'Account is created for '+user)
+            elif user_type == 'hir_ag':
+                messages.success(request, 'Account is created for Hiring Agency '+user)
 
             # for accessing which user is logged in, used it used multiple times
             request.session['uname'] = form.cleaned_data.get('username')
@@ -41,9 +56,10 @@ def loginPage(request):
             curr_user = UserDetails(u_id=User.objects.get(
                 username=request.session['uname']), email_add=User.objects.get(username=request.session['uname']).email)
             curr_user.save()
-            return redirect('profile_details')
+            return redirect('home')
         else:
             messages.info(request, 'invalid credentials')
+            
     context = {}
     return render(request, 'login.html', context)
 

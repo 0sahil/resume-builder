@@ -61,6 +61,11 @@
 
 			</div>
 
+			<select name="user_type">
+				<option value="user">User</option>
+				<option value="hir_ag">Hiring Agency</option>
+			</select>
+
 			<div class="d-flex justify-content-center mt-3 login_container">
 				<input class="btn" type="submit" value="Register Account">
 			</div>
@@ -82,10 +87,10 @@
 
 			//Query All input fields
 			var form_fields = document.getElementsByTagName('input')
-			form_fields[1].placeholder = 'Username..';
-			form_fields[2].placeholder = 'Email..';
-			form_fields[3].placeholder = 'Enter password...';
-			form_fields[4].placeholder = 'Re-enter Password...';
+			form_fields[1].placeholder = 'Username';
+			form_fields[2].placeholder = 'Email';
+			form_fields[3].placeholder = 'Enter password';
+			form_fields[4].placeholder = 'Re-enter Password';
 
 
 			for (var field in form_fields) {
