@@ -18,7 +18,7 @@ def home(request):
             print(e, ':', e.__class__)
             context = {}
 
-        return render(request, 'resume_templates/resume1.html', context)
+        return render(request, 'index.html', context)
 
 # TODO: Can't access if user is not logged in
 # TODO: Do Exception handling
