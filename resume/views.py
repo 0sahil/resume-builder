@@ -10,15 +10,31 @@ from .forms import UserDetailsForm
 def home(request):
     if request.method == 'GET':
 
-        # check if uname session_id exists or not
-        try:
-            context = {'users': User.objects.get(
-                username=request.session['uname'])}
-        except Exception as e:
-            print(e, ':', e.__class__)
-            context = {}
+        user = User.objects.get(username=request.session['uname'])
 
-        return render(request, 'index.html', context)
+        if user.groups.filter(name='User'):
+            # check if uname session_id exists or not
+            try:
+                context = {'users': User.objects.get(
+                    username=request.session['uname'])
+                    }
+            except Exception as e:
+                print(e, ':', e.__class__)
+                context = {}
+            return render(request, 'home/index.html', context)
+
+        elif user.groups.filter(name='HiringAgency'):
+            # check if uname session_id exists or not
+            try:
+                context = {'users': User.objects.get(
+                    username=request.session['uname'])
+                    }
+            except Exception as e:
+                print(e, ':', e.__class__)
+                context = {}
+            return render(request, 'home/hir_ag_home.html', context)
+        else:
+            return render(request, 'home/index.html')
 
 # TODO: Can't access if user is not logged in
 # TODO: Do Exception handling

@@ -1,0 +1,210 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easume:Talent Acquisition</title>
+  <link rel="stylesheet" href="{% static 'css/home/hir_ag_home.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script>
+    filterSelection("all")
+function filterSelection(c) {
+  //Intializing variables
+  var x, i;
+  //searches the page for the divs with the filterDiv class
+  x = document.getElementsByClassName("filterDiv");
+  if (c == "all") c = "";
+  // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+// Show filtered elements
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {
+      element.className += " " + arr2[i];
+    }
+  }
+}
+
+// Hide elements that are not selected
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+// Add active class to the current control button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace("active", " ");
+    this.className += " active";
+  });
+}
+
+  </script>
+
+</head>
+
+<body>
+  <div class="containerr">
+    <nav class="stroke">
+      <ul>
+        <li><img src="{% static 'img/home/logo.png'%}" class="headerlogo"></li>
+        <li><a href="#about_us">About us</a></li>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <li><a href="#sample_templates">Browse Resumes</a></li>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <!-- <li><a href="#steps_to_resume">Steps to build a good resume</a></li> -->
+        <!-- &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp -->
+        <!-- <li><a href="#footer">Contact us</a></li> -->
+      </ul>
+    </nav>
+
+    <div id="about_us" class="main-page">
+      <div class="home">
+        <!-- <img src="./images/home_.png" alt="" style="width:1519px;height:750px;">
+            </div> -->
+        <div class="dark_overlay">
+          <div class="container2">
+            <div class="row header-txt text-center">
+              <div class="col-xs-12 col-sm-12">
+                <h1>What do we do?</h1>
+                <h3>One stop destination for students, working professionals and recruiters.</h3>
+                <p>Create mulitple resumes with instant customization... <strong>Make your resume stand out!</strong>
+                </p>
+                <div class="get_started">
+                  <a href="#">Get Started</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="sample_templates" class="filter-page">
+        <section id="main">
+          <div class="container-fuild">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="display-area">
+                <h1 class="h1 text-center">Top Resumes</h1>
+                <!-- Filter buttons -->
+                <div id="myBtnContainer" class="col-md-12">
+                  <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+                  <button class="btn" onclick="filterSelection('datascientist')"> Data scientist</button>
+                  <button class="btn" onclick="filterSelection('marketing_analyst')"> Marketing Analyst</button>
+                  <!-- <button class="btn" onclick="filterSelection('autoBiograpghy')"> Auto-Biography</button>
+                  <button class="btn" onclick="filterSelection('crimeDrama')"> Crime-Drama</button>
+                  <button class="btn" onclick="filterSelection('history')"> History</button>
+                  <button class="btn" onclick="filterSelection('fiction')"> Fiction</button>
+                  <button class="btn" onclick="filterSelection('childFiction')"> Children's Fiction</button>
+                  <button class="btn" onclick="filterSelection('nonFiction')"> Non-Fiction</button>
+                  <button class="btn" onclick="filterSelection('thriller')"> Thriller</button>
+                  <button class="btn" onclick="filterSelection('mystery')"> Mystery</button>
+                  <button class="btn" onclick="filterSelection('play')"> Play</button>
+                  <button class="btn" onclick="filterSelection('memoir')"> Memoir</button>
+                  <button class="btn" onclick="filterSelection('novel')"> Novel</button>
+                  <button class="btn" onclick="filterSelection('critique')"> Critique</button> -->
+                </div>
+                <!--Dropdown filter-->
+                <div class="dropdown">
+                  <button class="dropbtn">Dropdown</button>
+                  <div class="dropdown-content">
+                    <a onclick="filterSelection('all')"> Show all</a>
+                    <a onclick="filterSelection('datascientist')"> Data Scientist</a>
+                    <a onclick="filterSelection('marketing_analyst')"> Marketing Analyst</a>
+                    <!-- <a onclick="filterSelection('autoBiograpghy')"> Auto-Biography</a>
+                    <a onclick="filterSelection('crimeDrama')"> Crime-Drama</a>
+                    <a onclick="filterSelection('history')"> History</a>
+                    <a onclick="filterSelection('childFiction')"> Children's Fiction</a>
+                    <a onclick="filterSelection('nonFiction')"> Non-Fiction</a>
+                    <a onclick="filterSelection('thriller')"> Thriller</a>
+                    <a onclick="filterSelection('mystery')"> Mystery</a>
+                    <a onclick="filterSelection('play')"> Play</a>
+                    <a onclick="filterSelection('memoir')"> Memoir</a>
+                    <a onclick="filterSelection('novel')"> Novel</a>
+                    <a onclick="filterSelection('critique')"> Critique</a> -->
+                  </div>
+                </div>
+                <div id="book-shelf" class="row row-eq-height">
+                  <article class="col-md-3 col-sm-6 filterDiv datascientist">
+                    <a href="https://www.qries.com/">
+                      <img
+                        src="https://cdn-images.zety.com/templates/zety/cascade-3-duo-blue-navy-21@3x.png" />
+                    </a>
+                    <p class="text-center">John Smith
+                      <br>
+                      <em>Data Scientist</em>
+                    </p>
+                  </article>
+
+                  <article class="col-md-3 col-sm-6 filterDiv marketing_analyst">
+                    <a href="https://www.qries.com/">
+                    <img
+                      src="https://resumegenius.com/wp-content/uploads/windsor-rex.svg" />
+                    </a>
+                      <p class="text-center">kelly Blackwell
+                      <br>
+                      <em>Marketing Analyst</em>
+                    </p>
+                  </article>
+
+                  <article class="col-md-3 col-sm-6 filterDiv marketing_analyst">
+                    <a href="https://www.qries.com/">
+                    <img src="https://marketplace.canva.com/EADaoq3EwVM/1/0/1236w/canva-blue-and-brick-red-geometric-modern-resume-g47AF8YW1oo.jpg"/>
+                    </a>
+                    <p class="text-center">Katelyn Johnson
+                      <br>
+                      <em>Marketing Analyst</em>
+                    </p>
+                  </article>
+                  <article class="col-md-3 col-sm-6 filterDiv marketing_analyst">
+                    <a href="https://www.qries.com/">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZKCXUyB-nPLTexKp9Z0ucvO9o2B6Pz2sK4w&usqp=CAU"/>
+                    </a>
+                    <p class="text-center">Karla Morandi
+                      <br>
+                      <em>Marketing Analyst</em>
+                    </p>
+                  </article>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </section>
+        <script type="text/javascript" src="js/main.js">
+        </script>
+      </div>
+    </div>
+
+
+
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>
