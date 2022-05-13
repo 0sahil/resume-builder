@@ -1,0 +1,83 @@
+@import url('http://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&disp');
+
+
+:root{
+    --black:#444;
+    --bg-color:#e6e6e6;
+    --border:.1rem solid rgba(0,0,0,.2);
+    --box-shadow:.2rem .2rem 1rem #ccc,
+                -.2rem -.2rem 1rem #fff;
+    --box-shadow-inset:.4rem .4rem 1rem #ccc inset,
+                      -.4rem -.4rem 1rem #fff inset;
+                      
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    outline: none; border:none;
+    /* text-decoration: none; */
+    text-transform: capitalize;
+    transition: .2s linear;
+    background-color: white;
+  }
+
+
+  section{
+    min-height: 100vh;
+    padding:2rem;
+    background: rgb(2,0,36);
+  background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(61,61,69,0.22762608461353295) 35%, rgba(142,162,135,1) 100%); ;
+  }
+
+  .section .user_card{
+    margin:1rem auto;
+    max-width: 60rem;
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    padding:2rem;
+  }
+
+  .section .user_card .box{
+    padding:1rem 1.5rem;
+    width:45%;
+    background: none;
+    color:var(--black);
+    font-size: 1.6rem;
+    text-transform: none;
+    margin:.7rem 0;
+    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+  }
+
+  .title{
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    font-weight: 500;
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+    padding-bottom: 1.5rem;
+    align-self: center;
+  }
+
+  .btn{
+    margin-top: 0.5rem;
+    display:inline-block;
+    padding:1rem 2rem;
+    border-radius: .5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background:radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(61,61,69,0.22762608461353295) 0%, rgba(142,162,135,1) 50%);
+    color:var(--black);
+    box-shadow: var(--box-shadow);
+  }
+
+  .btn:hover{
+        box-shadow: var(--box-shadow-inset);
+        color:black;
+    }
+
+.sign_up{
+    text-decoration: none;
+  }

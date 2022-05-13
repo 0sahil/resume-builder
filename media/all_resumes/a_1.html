@@ -1,0 +1,222 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+
+	<!-- <title>Jonathan Doe | Web Designer, Director | name@yourdomain.com</title> -->
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" media="all" /> 
+	<link rel="stylesheet" type="text/css" href="{% static 'a_1.css' %}" media="all" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<!-- <script src="{% static 'a_1.js' %}" type="text/javascript"></script> -->
+	<script>
+		$( document ).ready(function() {
+			// console.log( '{{ c_user }}'  
+			//console.log('hi');
+			$("#name").text("{{c_user_details.f_name}} " + "{{c_user_details.m_name}} " + "{{c_user_details.l_name}}");
+			$('#job_role').text("{{c_user_details.job_role}}"); 
+			$('#email_add').text("{{c_user_details.email_add}}");
+			$('#mobile_no').text("{{c_user_details.mobile_no}}");
+			$('#skill1').text("{{c_user_skills.0.skill_name}}"); //c_user_skills.iterator() to be used
+			$('#skill2').text("{{c_user_skills.1.skill_name}}")
+			$('#skill3').text("{{c_user_skills.2.skill_name}}")
+			$('#personal_details').text("{{c_user_address.house_street}} {{c_user_address.city}} {{c_user_address.pincode}} {{c_user_address.state}} {{c_user_address.country}} {{c_user_details.email_add}} {{c_user_details.mobile_no}} ")
+			$('#w_ins').text("{{c_user_work_exp.institution}}")
+			$('#w_role').text("{{c_user_work_exp.role}}")
+			$('#w_date').text("{{c_user_work_exp.start_date}} - {{c_user_work_exp.end_date}}")
+			$('#ed_ins1').text("{{c_user_edu.0.institution}}")
+			$('#ed_qual1').text("{{c_user_edu.0.qualification}}")
+			$('#ed_grade1').text("{{c_user_edu.0.grade}}")
+			$('#ed_ins2').text("{{c_user_edu.1.institution}}")
+			$('#ed_qual2').text("{{c_user_edu.1.qualification}}")
+			$('#ed_grade2').text("{{c_user_edu.1.grade}}")
+			$('#ed_ins3').text("{{c_user_edu.2.institution}}")
+			$('#ed_qual3').text("{{c_user_edu.2.qualification}}")
+			$('#ed_grade3').text("{{c_user_edu.2.grade}}")
+			//$('#hobby1').text("{{c_user_skills.0.skill_name}}"); //c_user_skills.iterator() to be used
+			//$('#hobby2').text("{{c_user_skills.1.skill_name}}")
+			//$('#hobby3').text("{{c_user_skills.2.skill_name}}")
+			$('#profile_img').attr("src", "{{c_user_details.profile_pic.url}}"); 
+			//console.log("{{c_user_details.profile_pic}}")
+
+		});
+		
+		$( window ).on( "load", function() {
+			// console.log( "window loaded" );
+		});
+	</script>
+
+	<script src="{% static 'js/pdf.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
+</head>
+<body id="formContainer">
+
+<div id="doc2" class="yui-t7">
+	<div id="inner">
+	
+		<div id="hd">
+			<div class="yui-gc">
+				<div class="yui-u first">
+					<h1 id="name">Jonathan Doe</h1>
+					<h2 id="job_role">Web Designer, Director</h2>
+				</div>
+
+				<div class="yui-u">
+					<button class="btn btn-primary" id="download">Download in PDF</button>
+					<div class="contact-info">
+						<img id="profile_img" src="" alt="">
+					</div><!--// .contact-info -->
+				</div>
+			</div><!--// .yui-gc -->
+		</div><!--// hd -->
+
+		<div id="bd">
+			<div id="yui-main">
+				<div class="yui-b">
+
+					<div class="yui-gf">
+						<div class="yui-u first">
+							<h2>Personal Details</h2>
+						</div>
+						<div class="yui-u">
+							<p class="enlarge" id="personal_details">
+								Progressively evolve cross-platform ideas before impactful infomediaries. Energistically visualize tactical initiatives before cross-media catalysts for change. 
+							</p>
+						</div>
+					</div><!--// .yui-gf -->
+
+					<div class="yui-gf">
+						<div class="yui-u first">
+							<h2>Skills</h2>
+						</div>
+						<div class="yui-u">
+
+								<div id='skill1' class="talent">
+									<h2>Web Design</h2>
+									<p>Assertively exploit wireless initiatives rather than synergistic core competencies.	</p>
+								</div>
+
+								<div id='skill2' class="talent">
+									<h2>Interface Design</h2>
+									<p>Credibly streamline mission-critical value with multifunctional functionalities.	 </p>
+								</div>
+
+								<div id='skill3' class="talent">
+									<h2>Project Direction</h2>
+									<p>Proven ability to lead and manage a wide variety of design and development projects in team and independent situations.</p>
+								</div>
+						</div>
+					</div>
+					<!--// .yui-gf -->
+
+					<!-- <div class="yui-gf">
+						<div class="yui-u first">
+							<h2>Technical</h2>
+						</div>
+						<div class="yui-u">
+							<ul class="talent">
+								<li>XHTML</li>
+								<li>CSS</li>
+								<li class="last">Javascript</li>
+							</ul>
+
+							<ul class="talent">
+								<li>Jquery</li>
+								<li>PHP</li>
+								<li class="last">CVS / Subversion</li>
+							</ul>
+
+							<ul class="talent">
+								<li>OS X</li>
+								<li>Windows XP/Vista</li>
+								<li class="last">Linux</li>
+							</ul>
+						</div>
+					</div>// .yui-gf -->
+
+					<div class="yui-gf">
+	
+						<div class="yui-u first">
+							<h2>Experience</h2>
+						</div><!--// .yui-u -->
+
+						<div class="yui-u">
+
+							<div class="job">
+								<h2 id="w_ins">Facebook</h2>
+								<h3 id="w_role">Senior Interface Designer</h3>
+								<h4 id="w_date">2005-2007</h4>
+							</div>
+
+						</div><!--// .yui-u -->
+					</div><!--// .yui-gf -->
+
+
+					<div class="yui-gf last">
+						<div class="yui-u first">
+							<h2>Education</h2>
+						</div>
+						<div class="yui-u">
+							<h2 id="ed_ins1">Indiana University - Bloomington, Indiana</h2>
+							<h3 id="ed_qual1">Dual Major, Economics and English &mdash;</h3>
+							<h4 id="ed_grade1">4.0 GPA</h4> 
+						</div>
+						<div class="yui-u">
+							<h2 id="ed_ins2">Indiana University - Bloomington, Indiana</h2>
+							<h3 id="ed_qual2">Dual Major, Economics and English &mdash;</h3>
+							<h4 id="ed_grade2">4.0 GPA</h4> 
+						</div>
+						<div class="yui-u">
+							<h2 id="ed_ins3">Indiana University - Bloomington, Indiana</h2>
+							<h3 id="ed_qual3">Dual Major, Economics and English &mdash;</h3>
+							<h4 id="ed_grade3">4.0 GPA</h4> 
+						</div>
+					</div><!--// .yui-gf -->
+
+					<!-- <div class="yui-gf">
+						<div class="yui-u first">
+							<h2>Hobbies</h2>
+						</div>
+						<div class="yui-u">
+
+								<div id='hobby1' class="talent">
+									<h2>Web Design</h2>
+									<p>Assertively exploit wireless initiatives rather than synergistic core competencies.	</p>
+								</div>
+
+								<div id='hobby2' class="talent">
+									<h2>Interface Design</h2>
+									<p>Credibly streamline mission-critical value with multifunctional functionalities.	 </p>
+								</div>
+
+								<div id='hobby3' class="talent">
+									<h2>Project Direction</h2>
+									<p>Proven ability to lead and manage a wide variety of design and development projects in team and independent situations.</p>
+								</div>
+						</div>
+					</div> -->
+
+
+				</div><!--// .yui-b -->
+			</div><!--// yui-main -->
+		</div><!--// bd -->
+
+		<!-- <div id="ft">
+			<p>Jonathan Doe &mdash; <a href="mailto:name@yourdomain.com">name@yourdomain.com</a> &mdash; (313) - 867-5309</p>
+		</div>// footer -->
+
+	</div><!-- // inner -->
+
+
+</div><!--// doc -->
+
+
+</body>
+</html>
+

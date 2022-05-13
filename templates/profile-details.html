@@ -1,0 +1,281 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/profile-details.css' %}">
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <!-- <script src="{% static 'js/profile-details.js' %}"></script> -->
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            image.style.width="170px"
+            image.style.height="170px";
+            image.style.display="block"
+            image.style.borderRadius="50%"
+        };
+        
+        $(document).ready(function () {
+            var max_fields = 10; //maximum input boxes allowed
+            var wrapper = $(".input_fields_wrap"); //Fields wrapper
+            var add_button = $(".add_field_button"); //Add button ID
+        
+            var x = 1; //initlal text box count
+            $(add_button).click(function (e) { //on add input button click
+                e.preventDefault();
+                if (x < max_fields) { //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).append('<div><input type="text" class="box" name="skill"/><a href="#" class="remove_field">&nbsp;&nbsp;&nbsp;&nbsp;Remove&nbsp;&nbsp;</a></div>'); //add input box
+                }
+            });
+        
+            $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            })
+        });
+        
+        $(document).ready(function () {
+            var max_fields = 10; //maximum input boxes allowed
+            var wrapper = $(".input_fields_wrap2"); //Fields wrapper
+            var add_button = $(".add_field_button2"); //Add button ID
+        
+            var x = 1; //initlal text box count
+            $(add_button).click(function (e) { //on add input button click
+                e.preventDefault();
+                if (x < max_fields) { //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).append('<div><input type="text" class="box" name="hobby"/><a href="#" class="remove_field">&nbsp;&nbsp;&nbsp;&nbsp;Remove&nbsp;&nbsp;</a></div>'); //add input box
+                }
+            });
+        
+            $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            })
+        });
+        
+        
+        $(document).ready(function () {
+            var max_fields = 10; //maximum input boxes allowed
+            var wrapper = $(".input_fields_wrap3"); //Fields wrapper
+            var add_button = $(".add_field_button3"); //Add button ID
+        
+            var x = 1; //initlal text box count
+            $(add_button).click(function (e) { //on add input button click
+                e.preventDefault();
+                if (x < max_fields) { //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).append('<div><input type="text" class="box" name="lang"/><a href="#" class="remove_field">&nbsp;&nbsp;&nbsp;&nbsp;Remove&nbsp;&nbsp;</a></div>'); //add input box
+                }
+            });
+        
+            $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            })
+        });
+        
+        $(document).ready(function () {
+            var max_fields = 10; //maximum input boxes allowed
+            var wrapper = $(".input_fields_wrap4"); //Fields wrapper
+            var add_button = $(".add_field_button4"); //Add button ID
+        
+            var x = 1; //initlal text box count
+            $(add_button).click(function (e) { //on add input button click
+                e.preventDefault();
+                if (x < max_fields) { //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).append('<div><input type="text" class="box" name="social_media"/><a href="#" class="remove_field">&nbsp;&nbsp;&nbsp;&nbsp;Remove&nbsp;&nbsp;</a></div>'); //add input box
+                }
+            });
+        
+            $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <section class="contact" id="contact">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="title">Build your resume here!</div>
+            <div class="form__container">
+                &nbsp;&nbsp;<span class="details">Profile Picture</span> <br>
+                <input type="file" id="profile_pic" name="image" accept="image/*" onchange="loadFile(event)"
+                    style="display: none;">
+                &nbsp;&nbsp;<label for="profile_pic" style="cursor: pointer;" class="btn-small">Upload Image</label></p>
+                <br>
+                <p><img id="output" width="200" /></p>
+                <!-- <div class="user-details"> -->
+                <div class="input-box">
+                    <!-- <span class="details">First Name</span> <br> -->
+                    <input type="text" class="box" id="fname" name="f_name" maxlength="10" size="50"
+                        placeholder="First Name" required />
+                    <!-- <span class="details">Middle Name</span> <br> -->
+                    <input type="text" class="box" id="mname" name="m_name" maxlength="10" size="50"
+                        placeholder="Middle Name" />
+                    <!-- <span class="details">Last Name</span> <br> -->
+                    <input type="text" class="box" id="lname" name="l_name" maxlength="10" size="50"
+                        placeholder="Last Name" />
+                </div>
+                <br>
+                <div class="input-box">
+                    <!-- <span class="details">Contact Number</span> </span> <br> -->
+                    <input type="text" class="box" id="contactno" name="mobile_no" maxlength="10"
+                        placeholder="Contact Number">
+                    <!-- <span class="details">Email </span> <br> -->
+                    <input type="email" class="box" id="email" name="email_add" maxlength="60" placeholder="Email">
+                </div>
+                <br>
+                <br>
+                <!-- Profile Picture <br>
+                <input type="file" id="image" name="profile_pic" accept="image/*">
+                <br> <br> -->
+                <div class="input-box">
+                    &nbsp;&nbsp;<span class="details">Date Of Birth</span>
+                    &nbsp;&nbsp;
+                    <input type="date" class="box" id="dob" name="dob" placeholder="date of birth">
+                </div>
+                <br>
+                <div class="input-box">
+                    <!-- <span class="details">Job Role</span> <br> -->
+                    <input type="text" class="box" id="job_role" name="job_role" maxlength="40" placeholder="Job Role">
+                    <!-- <span class="details">Referral</span> <br> -->
+                    <input type="text" class="box" id="referral" name="referal" maxlength="40" placeholder="Referral">
+                </div>
+                <br>
+                <div class="input-box">
+                    <!-- <span class="details">Address</span> <br> -->
+                    <textarea rows="1" cols="10" id="addr" name="house_street" class="box-big"
+                        placeholder="Address"></textarea>
+                    <input type="text" class="box" id="city" name="city" maxlength="35" placeholder="City">
+                    <input type="text" class="box" id="state" name="state" maxlength="35" placeholder="State">
+                    <input type="text" class="box" id="country" name="country" maxlength="35" placeholder="Country">
+                    <!-- <span class="details">Pincode </span> <br> -->
+                    <input type="text" class="box" id="pincode" name="pincode" maxlength="6" placeholder="Pincode" />
+                </div>
+                <br>
+                <div class="input-box">
+                    &nbsp;&nbsp;<span class="details"> Education Qualifications </span> <br>
+                </div>
+                <br>
+                <div class="input-box-edu">
+                    &nbsp;&nbsp;<span class="details_edu">Higher Education </span> <br>
+                    <input type="text" class="box-big" id="high_edu" name="high_edu" maxlength="40"
+                        placeholder="Institution">
+                    <input type="text" class="box-small" id="high_edu_per" name="high_edu_grade" maxlength="4"
+                        placeholder="Percentage">
+                </div>
+                <br>
+                <div class="input-box-edu">
+                    &nbsp;&nbsp;<span class="details_edu">Graduation </span> <br>
+                    <input type="text" class="box-big" id="graduation" name="graduation" maxlength="40"
+                        placeholder="Institution">
+                    <input type="text" class="box-small" id="graduation_per" name="graduation_grade" maxlength="4"
+                        placeholder="Percentage">
+                </div>
+                <br>
+                <div class="input-box-edu">
+                    &nbsp;&nbsp;<span class="details_edu">Masters</span> <br>
+                    <input type="text" class="box-big" id="masters" name="masters" maxlength="40"
+                        placeholder="Institution">
+                    <input type="text" class="box-small" id="masters_per" name="masters_grade" maxlength="4"
+                        placeholder="Percentage">
+                </div>
+                <br>
+                <div class="input-box">
+                    &nbsp;&nbsp;<span class="details">Work Experience </span> <br>
+                    <input type="text" class="box" id="work_exp_org" name="w_institution" maxlength="40"
+                        placeholder="Organization">
+                    <input type="text" class="box" id="work_exp_role" name="w_role" maxlength="10" placeholder="Role">
+                </div>
+                <br>
+                <div class="input-box">
+                    &nbsp;&nbsp;<span class="details_edu">Start Date </span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <span class="details_edu">End Date </span> <br>
+
+                    <input type="date" class="box" id="work_exp_sdate" name="start_date" maxlength="4"
+                        placeholder="Start Date">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                    <input type="date" class="box" id="work_exp_edate" name="end_date" maxlength="4"
+                        placeholder="Start Date">
+                </div>
+                <br>
+                <div class="input-box">
+                    &nbsp;&nbsp;<span class="details">Skills</span> <br>
+                    <input type="text" class="box" id="skills" name="skill">
+                </div>
+                <div class="input_fields_wrap"><button class="add_field_button">Add</button>
+                    <div><input type="text" name="skills[]"></div>
+                </div>
+                <br>
+                <div class="input-box">
+                    &nbsp;&nbsp;<span class="details">Hobbies</span> <br>
+                    <input type="text" class="box" id="hobbies" name="hobby">
+                </div>
+                <div class="input_fields_wrap2"><button class="add_field_button2">Add</button>
+
+                    <div><input type="text" name="hobbies[]"></div>
+                </div>
+                <br>
+                <div class="input-box">
+                    &nbsp;&nbsp;<span class="details">Languages</span> <br>
+                    <input type="text" class="box" id="language" name="lang">
+                </div>
+                <div class="input_fields_wrap3"><button class="add_field_button3">Add</button>
+
+                    <div><input type="text" name="hobbies[]"></div>
+                </div>
+                <br>
+                <div class="input-box">
+                    &nbsp;&nbsp;<span class="details">Social Media Links</span> <br>
+                    <input type="text" class="box" id="social_media" name="social_media" maxlength="40">
+                </div>
+
+                <div class="input_fields_wrap4"><button class="add_field_button4">Add</button>
+                    <div><input type="text" name="social_medi_links[]"></div>
+                </div>
+
+                <br />
+
+                <!-- </div> -->
+                <input type="submit" class="btn" value="Submit" />
+            </div>
+        </form>
+    </section>
+</body>
+<!-- create a Text Field   <input type="button" value="click" onclick="myFunction()"> -->
+
+</html>
+
+
+
+
+
+<!-- <input id="btnGet" type="button" value="Get Values" /> -->
+
+<!-- $("#btnGet").bind("click", function () {
+                var values = "";
+                $("input[name=DynamicTextBox]").each(function () {
+                    values += $(this).val() + "\n";
+                });
+                alert(values);
+            }); -->

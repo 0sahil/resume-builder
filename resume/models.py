@@ -12,8 +12,8 @@ class UserDetails(models.Model):
     f_name = models.CharField(max_length=30)
     m_name = models.CharField(max_length=30)
     l_name = models.CharField(max_length=30)
-    profile_pic = models.ImageField()
-    dob = models.DateField()
+    profile_pic = models.ImageField(upload_to='profile_img')
+    dob = models.DateField(null=True)
     mobile_no = models.CharField(max_length=10)
     email_add = models.EmailField()
     job_role = models.CharField(max_length=20)
@@ -24,8 +24,10 @@ class UserDetails(models.Model):
 
 class UserAddress(models.Model):
     u_id = models.OneToOneField(UserDetails, on_delete=models.CASCADE, primary_key=True) 
-    address = models.CharField(max_length=50)
+    house_street = models.CharField(max_length=50)
     city = models.CharField(max_length=30)
+    state = models.CharField(max_length=30)
+    country = models.CharField(max_length=30)
     pincode = models.CharField(max_length=6) # may have to add more fields
 
     class Meta:
@@ -82,7 +84,9 @@ class UserWorkExp(models.Model):
 
 class ResumeTemplateList(models.Model):
     t_id = models.IntegerField(primary_key=True) # it shoud be the primary key
-    template = models.FileField()
+    template_html = models.FileField()
+    template_css = models.FileField()
+    template_js = models.FileField()
     u_id = models.ManyToManyField(UserDetails) # many to many, favourite scenario
 
     class Meta:
