@@ -40,7 +40,7 @@ def registerPage(request):
 
     context = {'form': form}
 
-    return render(request, 'register.html', context)
+    return render(request, 'accounts/register.html', context)
 
 
 def loginPage(request):
@@ -61,7 +61,7 @@ def loginPage(request):
             messages.info(request, 'invalid credentials')
             
     context = {}
-    return render(request, 'login.html', context)
+    return render(request, 'accounts/login.html', context)
 
 
 def home(request):
@@ -70,4 +70,4 @@ def home(request):
 
 def logoutUser(request):
     logout(request)
-    return redirect('login')
+    return redirect('home')

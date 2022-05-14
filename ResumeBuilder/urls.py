@@ -12,7 +12,8 @@ urlpatterns = [
     path('', views.home, name='home'), # home page render
     path('accounts/', include('accounts.urls')), # for login/sign up
     path('fill-details/', views.profile_details, name='profile_details'), # fill details of user for resume
-    path('show-resume/', views.show_user_filled_resume, name='show_user_filled_resume') # for showung filled user resume
+    path('show-resume/', views.show_user_filled_resume, name='show_user_filled_resume'), # for showung filled user resume
+        path('auth/', include('social_django.urls', namespace='social')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # urlpatterns += urlpatterns('django.views.static',(r'^media/(?P<path>.*)','serve',{'document_root':settings.MEDIA_ROOT}), )

@@ -10,31 +10,41 @@ from .forms import UserDetailsForm
 def home(request):
     if request.method == 'GET':
 
-        user = User.objects.get(username=request.session['uname'])
+        try:
+            if request.session.get('uname'):
+                user = User.objects.get(username=request.session['uname'])
+            else:
+                request.session['uname'] = request.user.username
+                print('hi', request.session['uname'])
+                user = User.objects.get(username=request.session['uname'])
 
-        if user.groups.filter(name='User'):
-            # check if uname session_id exists or not
-            try:
-                context = {'users': User.objects.get(
-                    username=request.session['uname'])
-                    }
-            except Exception as e:
-                print(e, ':', e.__class__)
-                context = {}
-            return render(request, 'home/index.html', context)
+            if user.groups.filter(name='User'):
+                # check if uname session_id exists or not
+                try:
+                    context = {'users': User.objects.get(
+                        username=request.session['uname'])
+                        }
+                except Exception as e:
+                    print(e, ':', e.__class__)
+                    context = {}
+                return render(request, 'home/index.html', context)
 
-        elif user.groups.filter(name='HiringAgency'):
-            # check if uname session_id exists or not
-            try:
-                context = {'users': User.objects.get(
-                    username=request.session['uname'])
-                    }
-            except Exception as e:
-                print(e, ':', e.__class__)
-                context = {}
-            return render(request, 'home/hir_ag_home.html', context)
-        else:
+            elif user.groups.filter(name='HiringAgency'):
+                # check if uname session_id exists or not
+                try:
+                    context = {'users': User.objects.get(
+                        username=request.session['uname'])
+                        }
+                except Exception as e:
+                    print(e, ':', e.__class__)
+                    context = {}
+                return render(request, 'home/hir_ag_home.html', context)
+            else:
+                return render(request, 'home/index.html')
+        except Exception as e:
+            print(e)
             return render(request, 'home/index.html')
+
 
 # TODO: Can't access if user is not logged in
 # TODO: Do Exception handling
@@ -94,18 +104,40 @@ def profile_details(request):
         filled_user_details['dob'] = request.POST.get('dob')
         filled_user_details['mobile_no'] = request.POST.get('mobile_no')
         filled_user_details['email_add'] = request.POST.get('email_add')
+
         filled_user_details['job_role'] = request.POST.get('job_role')
-        filled_user_details['referal'] = request.POST.get('referal')
+        if filled_user_details['job_role'] == "datascientist":
+            filled_user_details['job_role'] = "Data Scientist"
+        elif filled_user_details['job_role'] == "softwaredeveloper":
+            filled_user_details['job_role'] = "Software Developer"
+        if filled_user_details['job_role'] == "informationsecurityanalyst":
+            filled_user_details['job_role'] = "Information Security Analyst"
+        if filled_user_details['job_role'] == "cloud_architect":
+            filled_user_details['job_role'] = "Cloud Architect"
+        if filled_user_details['job_role'] == "webdeveloper":
+            filled_user_details['job_role'] = "Web Developer"
+        if filled_user_details['job_role'] == "computersystemsanalyst":
+            filled_user_details['job_role'] = "Computer Systems Analyst"
+        if filled_user_details['job_role'] == "seoconsultant":
+            filled_user_details['job_role'] = "SEO Consultant"
+        if filled_user_details['job_role'] == "mlengineer":
+            filled_user_details['job_role'] = "Machine Learning Engineer"
+        if filled_user_details['job_role'] == "aiengineer":
+            filled_user_details['job_role'] = "Artificial Intelligence Engineer"
+        if filled_user_details['job_role'] == "appdeveloper":
+            filled_user_details['job_role'] = "App Developer"
+
+        filled_user_details['referal'] = request.POST.get('referral')
         filled_user_details['house_street'] = request.POST.get('house_street')
-        filled_user_details['city'] = request.POST.get('city')
+        # filled_user_details['city'] = request.POST.get('city')
+        filled_user_details['city'] = 'Chandigarh'  # hardcoding
         filled_user_details['state'] = request.POST.get('state')
-        filled_user_details['country'] = request.POST.get('country')
+        # filled_user_details['country'] = request.POST.get('country')
         filled_user_details['pincode'] = request.POST.get('pincode')
         filled_user_details['skills_list'] = request.POST.getlist('skill')
         filled_user_details['hobby_list'] = request.POST.getlist('hobby')
         filled_user_details['lang_list'] = request.POST.getlist('lang')
-        filled_user_details['social_media_list'] = request.POST.getlist(
-            'social_media')
+        filled_user_details['social_media_list'] = request.POST.getlist('social_media')
         # filled_user_details['user_education_list'] = {'qualification': request.POST.getlist('qualification'), 'e_institution': request.POST.getlist('e_institution'), 'grade': request.POST.getlist('grade')}
         # filled_user_details['user_work_exp_list'] = {'w_role': request.POST.getlist('w_role'), 'w_institution': request.POST.getlist('w_institution'), 'start_date': request.POST.getlist('start_date'), 'end_date': request.POST.getlist('end_date')}
 
@@ -135,7 +167,7 @@ def profile_details(request):
                 mobile_no=filled_user_details['mobile_no'],
                 email_add=filled_user_details['email_add'],
                 job_role=filled_user_details['job_role'],
-                referal=filled_user_details['referal']
+                referal=filled_user_details['referal'],
             )
             curr_user_address = UserAddress(
                 u_id=UserDetails.objects.get(pk=User.objects.get(
@@ -143,7 +175,7 @@ def profile_details(request):
                 house_street=filled_user_details['house_street'],
                 city=filled_user_details['city'],
                 state=filled_user_details['state'],
-                country=filled_user_details['country'],
+                # country=filled_user_details['country'],
                 pincode=filled_user_details['pincode']
             )
             for i in range(len(filled_user_details['skills_list'])):
@@ -217,7 +249,8 @@ def profile_details(request):
 
             curr_user_details.save()
             curr_user_address.save()
-            return redirect('res')
+            
+            return redirect('show_user_filled_resume')
         else:
             pass
             # TODO: show the same page with filled data to enter the data again

@@ -852,6 +852,12 @@ document.getElementById("citySelect").selectedIndex = 0;
 </head>
 
 <body>
+
+        <nav class="stroke">
+          <ul>
+            <li><img src="{% static 'img/home/logo.png' %}" class="headerlogo"></li>
+          </ul>
+        </nav>
     <section class="contact" id="contact">
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -899,7 +905,7 @@ document.getElementById("citySelect").selectedIndex = 0;
           
                             
                    <label for="jobs"></label>
-  <select id="jobs" name="jobs" onchange="makeSubmenu(this.value)" class="box">
+  <select id="jobs" name="job_role" onchange="makeSubmenu(this.value)" class="box">
 <option value="" disabled selected>Select Job Role</option>>
     <option value="datascientist">Data Scientist</option>
     <option value="softwaredeveloper">Software Developer</option>
@@ -934,7 +940,7 @@ document.getElementById("citySelect").selectedIndex = 0;
                   
                   
             <span class = "loc1">
-       <select id="stateSelect" size="1" onchange="makeSubmenu(this.value)" class="box">
+       <select id="stateSelect" name="state" size="1" onchange="makeSubmenu(this.value)" class="box">
 <option value="" disabled selected>Choose State</option>
 <option>Andhra_Pradesh</option>
 <option>Arunachal Pradesh</option>
@@ -970,7 +976,7 @@ document.getElementById("citySelect").selectedIndex = 0;
          </span>
   <span class loc2>
 </select>
-<select id="citySelect" size="1" class="box">
+<select name="city" id="citySelect" size="1" class="box">
 <option value="" disabled selected>Choose City</option>
 <option></option>
 </select>       

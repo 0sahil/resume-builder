@@ -138,3 +138,22 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTHENTICATION_BACKENDS = [
+   
+    
+    'django.contrib.auth.backends.ModelBackend',
+
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.linkedin.LinkedinOAuth2',
+  
+]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY='14920635828-nfljas9rlv49ks2h308bridsjm2brhgd.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET='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'
+
+
+ 
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '77aca7gqsmfjrw'
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'O7zJ6zcWDqmQT0tB'
+
+LOGIN_REDIRECT_URL='/'

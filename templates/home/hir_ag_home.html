@@ -69,15 +69,27 @@ for (var i = 0; i < btns.length; i++) {
   <div class="containerr">
     <nav class="stroke">
       <ul>
-        <li><img src="{% static 'img/home/logo.png'%}" class="headerlogo"></li>
+        <li>
+          <a href="{% url 'home' %}"><img src="{% static 'img/home/logo.png'%}" class="headerlogo"></a></li>
         <li><a href="#about_us">About us</a></li>
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         <li><a href="#sample_templates">Browse Resumes</a></li>
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+        {% if request.user.is_authenticated %}
+        <li id="logout_link"><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li id="login_link"><a href="{% url 'login'%}">Login</a></li>
+        {% endif %}
         <!-- <li><a href="#steps_to_resume">Steps to build a good resume</a></li> -->
         <!-- &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp -->
         <!-- <li><a href="#footer">Contact us</a></li> -->
+        {% if request.user.is_authenticated %}
+        <li style="font-size: x-large; padding-left: 200px;"><pre> <strong>Welcome {{request.user}}! </strong></pre></li>
+        {% endif %}
       </ul>
+
+
     </nav>
 
     <div id="about_us" class="main-page">
@@ -109,11 +121,13 @@ for (var i = 0; i < btns.length; i++) {
               <div class="col-md-12">
                 <div class="display-area">
                 <h1 class="h1 text-center">Top Resumes</h1>
+                <br>
                 <!-- Filter buttons -->
                 <div id="myBtnContainer" class="col-md-12">
                   <button class="btn active" onclick="filterSelection('all')"> Show all</button>
                   <button class="btn" onclick="filterSelection('datascientist')"> Data scientist</button>
                   <button class="btn" onclick="filterSelection('marketing_analyst')"> Marketing Analyst</button>
+                  <br>
                   <!-- <button class="btn" onclick="filterSelection('autoBiograpghy')"> Auto-Biography</button>
                   <button class="btn" onclick="filterSelection('crimeDrama')"> Crime-Drama</button>
                   <button class="btn" onclick="filterSelection('history')"> History</button>
@@ -134,6 +148,7 @@ for (var i = 0; i < btns.length; i++) {
                     <a onclick="filterSelection('all')"> Show all</a>
                     <a onclick="filterSelection('datascientist')"> Data Scientist</a>
                     <a onclick="filterSelection('marketing_analyst')"> Marketing Analyst</a>
+                    <br>
                     <!-- <a onclick="filterSelection('autoBiograpghy')"> Auto-Biography</a>
                     <a onclick="filterSelection('crimeDrama')"> Crime-Drama</a>
                     <a onclick="filterSelection('history')"> History</a>
@@ -147,9 +162,10 @@ for (var i = 0; i < btns.length; i++) {
                     <a onclick="filterSelection('critique')"> Critique</a> -->
                   </div>
                 </div>
+                <br>
                 <div id="book-shelf" class="row row-eq-height">
                   <article class="col-md-3 col-sm-6 filterDiv datascientist">
-                    <a href="https://www.qries.com/">
+                    <a href="">
                       <img
                         src="https://cdn-images.zety.com/templates/zety/cascade-3-duo-blue-navy-21@3x.png" />
                     </a>
@@ -160,18 +176,18 @@ for (var i = 0; i < btns.length; i++) {
                   </article>
 
                   <article class="col-md-3 col-sm-6 filterDiv marketing_analyst">
-                    <a href="https://www.qries.com/">
+                    <a href="">
                     <img
                       src="https://resumegenius.com/wp-content/uploads/windsor-rex.svg" />
                     </a>
-                      <p class="text-center">kelly Blackwell
+                      <p class="text-center">Kelly Blackwell
                       <br>
                       <em>Marketing Analyst</em>
                     </p>
                   </article>
 
                   <article class="col-md-3 col-sm-6 filterDiv marketing_analyst">
-                    <a href="https://www.qries.com/">
+                    <a href="">
                     <img src="https://marketplace.canva.com/EADaoq3EwVM/1/0/1236w/canva-blue-and-brick-red-geometric-modern-resume-g47AF8YW1oo.jpg"/>
                     </a>
                     <p class="text-center">Katelyn Johnson
@@ -180,7 +196,7 @@ for (var i = 0; i < btns.length; i++) {
                     </p>
                   </article>
                   <article class="col-md-3 col-sm-6 filterDiv marketing_analyst">
-                    <a href="https://www.qries.com/">
+                    <a href="">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZKCXUyB-nPLTexKp9Z0ucvO9o2B6Pz2sK4w&usqp=CAU"/>
                     </a>
                     <p class="text-center">Karla Morandi

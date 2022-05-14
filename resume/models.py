@@ -16,7 +16,7 @@ class UserDetails(models.Model):
     dob = models.DateField(null=True)
     mobile_no = models.CharField(max_length=10)
     email_add = models.EmailField()
-    job_role = models.CharField(max_length=20)
+    job_role = models.CharField(max_length=40)
     referal = models.CharField(max_length=20)
 
     class Meta:
@@ -27,7 +27,7 @@ class UserAddress(models.Model):
     house_street = models.CharField(max_length=50)
     city = models.CharField(max_length=30)
     state = models.CharField(max_length=30)
-    country = models.CharField(max_length=30)
+    # country = models.CharField(max_length=30)
     pincode = models.CharField(max_length=6) # may have to add more fields
 
     class Meta:
